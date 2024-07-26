@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+.Display-time{
+    background-color: cadetblue;
+    border: none;
+    width: fit-content;
+    font-size: large;
+    color: white;
+}
+#Displays{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 10px;
+    width: fit-content;
+    gap: 20px;
+    background-color: cadetblue;
+    border: solid 2px black;
+    border-radius: 10px;
+}
+button{
+    background-color: rgb(61, 107, 140);
+    width: 200px;
+    height: 30px;
+    margin: 20px;
+    color: white;
+    border: solid 3px black;
+    border-radius: 10px;
+}
+button:hover{
+    background-color: rgb(47, 83, 109);
+}
+button:active{
+    background-color: rgb(47, 83, 109);
+    transform: scale(0.97);
+}
+</style>
+</head>
+<body>
+
+<h1>Temp de travail</h1>
+
+<p>Calcule le temps de travail :</p>
+<div id="Displays">
+<input type="text" class="Display-time" id="Display-time-passed" size="50">
+<input type="text" class="Display-time" id="Display-total-time" size="50">
+</div>
+<button onclick="Start()">Commence à travailler</button>
+<button onclick="Stop()">Arrête de travailler</button>
+<p id="demo"></p>
+
+<script>
+// Calculate milliseconds in a year
+const second = 1000;
+const minute = second * 60;
+const hour = minute * 60;
+const day = hour * 24;
+const year = day * 365;
+
+// Divide Time with a year
+let total_time = 0;
+let time_start = 0;
+let time_stop = 0;
+let total_days = 0;
+let total_seconds = 0;
+let total_minutes = 0;
+let total_hours = 0;
+
+
+document.getElementById("myText").value = (0).toString() + " jours " + (0).toString() + " heures " + (0).toString() + " minutes " + (0).toString() + " secondes ";
+
+function Start() {
+    let d1 = new Date();
+    time_start = d1.getTime();
+}
+function Stop() {
+    let d2 = new Date();
+    time_stop = d2.getTime();
+    let days = Math.round(-(time_start - time_stop) / day);
+    let secondes = Math.round(-(time_start - time_stop) / second);
+    let minutes = Math.round(-(time_start - time_stop) / minute);
+    let heures = Math.round(-(time_start - time_stop) / hour);
+    time_start = d2.getTime();
+    total_days += days;
+    total_seconds += secondes;
+    total_minutes += minutes;
+    total_hours += heures;
+    let text_total_time = "Temps total passé : " + (total_days).toString() + " jours " + (total_hours).toString() + " heures " + (total_minutes).toString() + " minutes " + (total_seconds).toString() + " secondes ";
+    let text_time_spent = "Session de travail de : " + (heures).toString() + " heures " + (minutes).toString() + " minutes " + (secondes).toString() + " secondes ";
+    document.getElementById("Display-time-passed").value = text_time_spent;
+    document.getElementById("Display-total-time").value = text_total_time;
+}
+</script>

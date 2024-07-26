@@ -30,6 +30,7 @@ h1, h2 {
     padding: 10px;
     border: 2px solid #ccc;
     border-radius: 4px;
+    font-size: small;
 }
 
 .add-course button {
@@ -41,6 +42,7 @@ h1, h2 {
     color: white;
     border-radius: 4px;
     cursor: pointer;
+    font-size: small;
 }
 
 .add-course button:hover {

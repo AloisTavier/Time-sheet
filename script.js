@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const notesBtn = courseElement.querySelector('.add-notes-btn');
 
         playBtn.addEventListener('click', () => startTimer(course, timeSpan, playBtn, stopBtn));
-        stopBtn.addEventListener('click', () => stopTimer(course, playBtn, stopBtn));
+        stopBtn.addEventListener('click', () => stopTimer(course, playBtn, stopBtn, courseElement));
         closeBtn.addEventListener('click', () => removeCourse(name));
         notesBtn.addEventListener('click', () => addNotes(course, courseElement));
 
@@ -84,10 +84,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    function stopTimer(course, playBtn, stopBtn) {
+    function stopTimer(course, playBtn, stopBtn, courseElement) {
+        let sessionEnd = new Date();
+        end_time = sessionEnd.getTime();
+        let session_duration = Math.floor((end_time - start_time)/1000);
+        let hours = Math.floor(session_duration / 3600);
+        let minutes = Math.floor((session_duration % 3600) / 60);
+        let secs = session_duration % 60;
         playBtn.disabled = false;
         stopBtn.disabled = true;
         clearInterval(course.interval);
+        course.notes.push({ time: new Date(), note: "Temps de travail " + `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} `});
+        displayNotes(course, courseElement);
     }
 
     function updateTimeDisplay(seconds, element) {
@@ -96,8 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const secs = seconds % 60;
         element.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
-    function addNotes(course, courseElement) {
-        const notes = prompt('Ajouter des notes pour cette session :');
+    function addNotes(course, courseElement, text_note=null) {
+        const notes = prompt('Ajouter des notes pour cette session :')
+        if (text_note != null) {
+            course.notes.push({ time: new Date(), note: text_note });
+            displayNotes(course, courseElement);
+        }
         if (notes) {
             course.notes.push({ time: new Date(), note: notes });
             displayNotes(course, courseElement);

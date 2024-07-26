@@ -41,8 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="time">0:00:00</span>
                 <button class="close-course" id="close-course-${name}">&times;</button>
                 <div class="notes-container"></div>
-                
-                
             </div>
         `;
 
@@ -54,16 +52,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         playBtn.addEventListener('click', () => startTimer(course, timeSpan, playBtn, stopBtn));
         stopBtn.addEventListener('click', () => stopTimer(course, playBtn, stopBtn, courseElement));
-        closeBtn.addEventListener('click', () => removeCourse(name));
+        closeBtn.addEventListener('click', () => removeCourse(name, courseElement));
         notesBtn.addEventListener('click', () => addNotes(course, courseElement));
 
         coursesList.appendChild(courseElement);
     }
     
-    function removeCourse(name) {
+    function removeCourse(name, courseElem) {
+        stopTimer(courses[name], courseElem.querySelector('.play-btn'), courseElem.querySelector('.stop-btn'), courseElem);
         delete courses[name];
         const courseElement = document.querySelector(`[data-course="${name}"]`);
         courseElement.remove();
+        if (coursesList.children.length === 0) {
+            totalSeconds = 0;
+            updateTimeDisplay(totalSeconds, totalTimeSpan);
+        }
     }
     function startTimer(course, timeSpan, playBtn, stopBtn) {
         playBtn.disabled = true;

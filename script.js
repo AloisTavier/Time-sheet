@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("popupButton");
 
         alert_Message_container.innerHTML =
-            "<h3>Pourcentage de temps de travail par cours</h3>";
+            "<h3>Pourcentage de travail par cours</h3>";
         for (const name in courses) {
             const course = courses[name];
             const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
@@ -161,6 +161,27 @@ document.addEventListener('DOMContentLoaded', () => {
             `${name}` + "  :  "  + `${percentage}%` + "<br><br>";
             alertBox.style.display = "block";
         }
+        const courseNames = Object.keys(courses);
+        const timeSpent = courseNames.map(name => courses[name].seconds / 3600); // Convertir les secondes en heures
+
+        // Créer le graphique
+        const ctx = document.getElementById('timeChart').getContext('2d');
+
+        const timeChart = new Chart(ctx, {
+            type: 'pie', // Vous pouvez choisir d'autres types de graphiques, comme 'line', 'pie', etc.
+            data: {
+                labels: courseNames,
+                datasets: [{
+                    label: 'Temps passé (heures)',
+                    data: timeSpent,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                }
+            }
+        });
     }
     custom_button.addEventListener
     ('click', function () {
@@ -173,3 +194,4 @@ document.addEventListener('DOMContentLoaded', () => {
         alertBox.style.display = "none";
     });
 });
+

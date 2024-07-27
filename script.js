@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalSeconds = 0;
     let start_time = 0;
     let current_time = 0;
-    let end_time = 0;
-    let pause_time = 0;
+    let number_of_plays = 0;
     const courses = {};
 
     addCourseBtn.addEventListener('click', () => {
@@ -69,6 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     function startTimer(course, timeSpan, playBtn, stopBtn) {
+        if (number_of_plays > 0) {
+            alert("Vous ne savez pas travailler sur plusieurs cours en même temps et dasn tous les cas je ne saurais pas comment faire pour gérer cela. Vous devez arrêter le cours en cours avant de commencer un autre cours.");
+        }
+        number_of_plays++;
+
         playBtn.disabled = true;
         stopBtn.disabled = false;
         let sessionStart = new Date();
@@ -88,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function stopTimer(course, playBtn, stopBtn, courseElement) {
+        number_of_plays--;
         let sessionEnd = new Date();
         end_time = sessionEnd.getTime();
         let session_duration = Math.floor((end_time - start_time)/1000);

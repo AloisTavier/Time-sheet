@@ -19,7 +19,7 @@ body {
 .container {
     max-width: 800px;
     margin: 50px  auto;
-    padding: 20px;
+    padding: 45px;
     background: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -75,7 +75,8 @@ h1 {
 }
 
 .course h3 {
-    margin: 0;
+    margin: 5px 0px 5px 0px;
+    max-width: 50%;
 }
 
 .course button:active {
@@ -83,7 +84,7 @@ h1 {
 }
 
 .course .play-btn {
-    padding: 7px 13px;
+    padding: 7px 17px;
     margin-right: 20px;
     margin-top: 6px;
     margin-bottom: 7px;
@@ -97,7 +98,7 @@ h1 {
 }
 
 .course .stop-btn {
-    padding: 7px 13px;
+    padding: 7px 17px;
     margin-right: 20px;
     margin-top: 6px;
     margin-bottom: 7px;
@@ -134,7 +135,7 @@ h1 {
     margin-top: 20px;
 }
 .add-notes-btn{
-    padding: 7px 13px;
+    padding: 7px 15px;
     margin-right: 20px;
     margin-top: 6px;
     margin-bottom: 7px;

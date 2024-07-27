@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("popupButton");
 
         alert_Message_container.innerHTML =
-            "<h3>Temps par cours en pourcentages</h3>";
+            "<h3>Pourcentage de temps de travail par cours</h3>";
         for (const name in courses) {
             const course = courses[name];
             const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;

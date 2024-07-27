@@ -2,12 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const addCourseBtn = document.getElementById('add-course-btn');
     const coursesList = document.getElementById('courses-list');
     const totalTimeSpan = document.getElementById('total-time');
-    
+
     let totalSeconds = 0;
     let start_time = 0;
     let current_time = 0;
     let number_of_plays = 0;
     const courses = {};
+    let timeChart = null; // Initialisation de la variable
 
     addCourseBtn.addEventListener('click', () => {
         const courseName = document.getElementById('course-name').value;
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         coursesList.appendChild(courseElement);
     }
-    
+
     function removeCourse(name, courseElem) {
         stopTimer(courses[name], courseElem.querySelector('.play-btn'), courseElem.querySelector('.stop-btn'), courseElem);
         delete courses[name];
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTimeDisplay(totalSeconds, totalTimeSpan);
         }
     }
+
     function startTimer(course, timeSpan, playBtn, stopBtn) {
         if (number_of_plays > 0) {
             alert("Vous ne savez pas travailler sur plusieurs cours en même temps et dasn tous les cas je ne saurais pas comment faire pour gérer cela. Vous devez arrêter le cours en cours avant de commencer un autre cours.");
@@ -84,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let time_passed = Math.floor((current.getTime() - current_time)/1000);
             current_time = current.getTime();
             course.seconds += time_passed;
-            //course.seconds++;
             totalSeconds += time_passed;
             updateTimeDisplay(course.seconds, timeSpan);
             updateTimeDisplay(totalSeconds, totalTimeSpan);
@@ -112,8 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const secs = seconds % 60;
         element.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
-    function addNotes(course, courseElement, text_note=null) {
-        const notes = prompt('Ajouter des notes pour cette session :')
+
+    function addNotes(course, courseElement, text_note = null) {
+        const notes = prompt('Ajouter des notes pour cette session :');
         if (text_note != null) {
             course.notes.push({ time: new Date(), note: text_note });
             displayNotes(course, courseElement);
@@ -130,45 +132,41 @@ document.addEventListener('DOMContentLoaded', () => {
         course.notes.forEach(note => {
             const noteElement = document.createElement('div');
             noteElement.classList.add('note');
-            noteElement.textContent = `${note.time.toLocaleString("fr-BE",{dateStyle: 'long'})} : ${note.note}`;
+            noteElement.textContent = `${note.time.toLocaleString("fr-BE", { dateStyle: 'long' })} : ${note.note}`;
             notesContainer.appendChild(noteElement);
         });
     }
 
-    let alertBox =
-    document.getElementById("customAlertBox");
-    let alert_Message_container =
-    document.getElementById("alertMessage");
-    let custom_button =
-    document.getElementById("popupButton");
-    let close_course = document.getElementById("close-course");
-    let close_img =
-    document.querySelector(".close");
     function updatePercentage() {
-        let alertBox =
-        document.getElementById("customAlertBox");
-        let alert_Message_container =
-        document.getElementById("alertMessage");
-        let custom_button =
-        document.getElementById("popupButton");
+        let alertBox = document.getElementById("customAlertBox");
+        let alert_Message_container = document.getElementById("alertMessage");
 
-        alert_Message_container.innerHTML =
-            "<h3>Pourcentage de travail par cours</h3>";
+        alert_Message_container.innerHTML = "<h3>Pourcentage de travail par cours</h3>";
         for (const name in courses) {
             const course = courses[name];
             const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
-            alert_Message_container.innerHTML +=
-            `${name}` + "  :  "  + `${percentage}%` + "<br><br>";
+            alert_Message_container.innerHTML += `${name}` + "  :  " + `${percentage}%` + "<br><br>";
             alertBox.style.display = "block";
         }
+
         const courseNames = Object.keys(courses);
         const timeSpent = courseNames.map(name => courses[name].seconds / 3600); // Convertir les secondes en heures
 
-        // Créer le graphique
+        console.log("Before destroying chart, timeChart:", timeChart); // Log avant la destruction
+
+        if (timeChart) {
+            console.log("Destroying existing chart"); // Ajouter un log pour vérifier
+            try {
+                timeChart.destroy(); // Détruire le graphique existant avant d'en créer un nouveau
+            } catch (error) {
+                console.error("Error destroying chart:", error); // Capturer les erreurs de destruction
+            }
+        }
+
         const ctx = document.getElementById('timeChart').getContext('2d');
 
-        const timeChart = new Chart(ctx, {
-            type: 'pie', // Vous pouvez choisir d'autres types de graphiques, comme 'line', 'pie', etc.
+        timeChart = new Chart(ctx, {
+            type: 'pie',
             data: {
                 labels: courseNames,
                 datasets: [{
@@ -178,20 +176,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             },
             options: {
-                scales: {
-                }
+                scales: {}
             }
         });
+
+        console.log("After creating chart, timeChart:", timeChart); // Log après la création
     }
-    custom_button.addEventListener
-    ('click', function () {
+
+    const custom_button = document.getElementById('popupButton');
+    custom_button.addEventListener('click', function () {
         updatePercentage();
     });
-    
-    close_img.addEventListener
-    ('click', function () {
-        alert_Message_container.innerHTML ="";
+
+    const close_img = document.querySelector('.close');
+    close_img.addEventListener('click', function () {
+        const alert_Message_container = document.getElementById("alertMessage");
+        alert_Message_container.innerHTML = "";
+        const alertBox = document.getElementById("customAlertBox");
         alertBox.style.display = "none";
     });
 });
-

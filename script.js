@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
         courseElement.innerHTML = `
             <h3>${name}</h3>
             <div>
-                <button class="play-btn">Play</button>
-                <button class="stop-btn" disabled>Stop</button>
-                <button class="add-notes-btn">Notes</button>
+                <button class="play-btn" title="Lance le chronomètre pour le cours">Play</button>
+                <button class="stop-btn" title="Arrête le chronomètre pour le cours" disabled>Stop</button>
+                <button class="add-notes-btn" title="Ajouter une note à propos de la session de travail">Notes</button>
                 <span class="time">0:00:00</span>
                 <button class="close-course" id="close-course-${name}">&times;</button>
-                <div class="notes-container"></div>
+                <div class="notes-container" style="display:none">Commentaires : <br></div>
             </div>
         `;
 
@@ -71,7 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startTimer(course, timeSpan, playBtn, stopBtn) {
         if (number_of_plays > 0) {
-            alert("Vous ne savez pas travailler sur plusieurs cours en même temps et dasn tous les cas je ne saurais pas comment faire pour gérer cela. Vous devez arrêter le cours en cours avant de commencer un autre cours.");
+            alert("Pas possible de travailler sur plusieurs cours en même temps (et je sais pas comment on fait pour que ça marche dans le programme). Donc Arrêez le chrono en cours pour en lancer un autre.");
+            return 0;
         }
         number_of_plays++;
 
@@ -128,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayNotes(course, courseElement) {
         const notesContainer = courseElement.querySelector('.notes-container');
+        notesContainer.style.display = 'flex';
         notesContainer.innerHTML = ''; // Clear previous notes
         course.notes.forEach(note => {
             const noteElement = document.createElement('div');
@@ -152,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const courseNames = Object.keys(courses);
         const timeSpent = courseNames.map(name => courses[name].seconds / 3600); // Convertir les secondes en heures
 
-        console.log("Before destroying chart, timeChart:", timeChart); // Log avant la destruction
 
         if (timeChart) {
             console.log("Destroying existing chart"); // Ajouter un log pour vérifier
@@ -179,8 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 scales: {}
             }
         });
-
-        console.log("After creating chart, timeChart:", timeChart); // Log après la création
     }
 
     const custom_button = document.getElementById('popupButton');

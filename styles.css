@@ -8,13 +8,17 @@ body {
 .notes-container{
     display: flex;
     flex-direction: column;
-    max-height: 30px;
-    border: 1px solid #cecece;
+    max-height: 34px;
+    width: 95%;
+    border: 1px solid #bebebe;
     border-radius: 5px;
     padding: 5px;
     margin: 5px 0px 5px 0px;
     font-size: small;
+    text-indent: 5px;
     overflow: auto;
+    color: #000000;
+    background-color: #f4f4f4;
 }
 .container {
     max-width: 800px;
@@ -24,17 +28,14 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 h1 {
     text-align: center;
 }
-
 .add-course {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
-
 .add-course input {
     width: 300px;
     padding: 10px;
@@ -42,7 +43,6 @@ h1 {
     border-radius: 4px;
     font-size: small;
 }
-
 .add-course button {
     padding: 10px 20px;
     margin-left: 10px;
@@ -59,6 +59,7 @@ h1 {
     background-color:  #2ab54b;
     transform: scale(1.04);
 }
+
 .add-course button:active {
     transform: scale(1);
 }
@@ -84,10 +85,10 @@ h1 {
 }
 
 .course .play-btn {
-    padding: 7px 17px;
+    padding: 8px 17px 8px 17px; ;
     margin-right: 20px;
-    margin-top: 6px;
-    margin-bottom: 7px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -98,10 +99,10 @@ h1 {
 }
 
 .course .stop-btn {
-    padding: 7px 17px;
+    padding: 8px 17px 8px 17px; ;
     margin-right: 20px;
-    margin-top: 6px;
-    margin-bottom: 7px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -135,10 +136,10 @@ h1 {
     margin-top: 20px;
 }
 .add-notes-btn{
-    padding: 7px 15px;
+    padding: 8px 15px  8px 15px;
     margin-right: 20px;
-    margin-top: 6px;
-    margin-bottom: 7px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -160,16 +161,16 @@ h1 {
 #popupButton{
     margin: 15px;
     padding: 5px 12px 5px 12px;
-    border: none;
+    border: solid 1px #afafaf;
     font-size: medium;
     transition: transform 0.3s ease;
-    background-color: #d3d3d3;
+    background-color: #f1f1f1;
     /*color: white;*/
     border-radius: 5px;
     cursor: pointer;
 }
 #popupButton:hover {
-    background-color: #c1c1c1;
+    background-color: #d9d9d9;
     transform: scale(1.06);
 }
 #popupButton:active {
@@ -192,7 +193,7 @@ h1 {
 
 .custom-alert-content {
     background-color: #fefefe;
-    margin: 100px auto;
+    margin: 80px auto;
     padding: 30px;
     border: 1px solid #888;
     width: 80%;
@@ -209,7 +210,7 @@ h1 {
     font-size: 25px;
     font-weight: bold;
     margin-left: 15px;
-    padding: 2px 5px 0px 5px;
+    padding: 1px 5px 0px 5px;
     top: 0px;
 }
 .close-course:hover,

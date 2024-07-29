@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         courseElement.setAttribute('data-course', name);
         courseElement.innerHTML = `
             <h3>${name}</h3>
-            <div>
+            <div class="time-info">
                 <button class="play-btn" title="Lance le chronomètre pour le cours">Play</button>
                 <button class="stop-btn" title="Arrête le chronomètre pour le cours" disabled>Stop</button>
                 <button class="add-notes-btn" title="Ajouter une note à propos de la session de travail">Notes</button>
@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function removeCourse(name, courseElem) {
         stopTimer(courses[name], courseElem.querySelector('.play-btn'), courseElem.querySelector('.stop-btn'), courseElem);
+        totalSeconds -= courses[name].seconds;
+        updateTimeDisplay(totalSeconds, totalTimeSpan);
         delete courses[name];
         const courseElement = document.querySelector(`[data-course="${name}"]`);
         courseElement.remove();
@@ -173,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [{
                     label: 'Temps passé (heures)',
                     data: timeSpent,
-                    borderWidth: 1
+                    borderWidth: 0.5
                 }]
             },
             options: {

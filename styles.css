@@ -9,11 +9,10 @@ body {
     display: flex;
     flex-direction: column;
     max-height: 34px;
-    width: 93%;
     border: 1px solid #bebebe;
     border-radius: 5px;
     padding: 6px 10px 6px 10px;
-    margin: 5px 0px 5px 0px;
+    margin: 7px 5px 7px 0px;
     font-size: small;
     overflow: auto;
     color: #000000;
@@ -28,7 +27,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .time-info{
-    width: 50%;
+    width: 49%;
 }
 .time{
     font-weight: bold;
@@ -82,8 +81,8 @@ h1 {
 }
 
 .course h3 {
-    margin: 5px 0px 5px 0px;
-    max-width: 45%;
+    margin: 6px 15px 4px 0px;
+    max-width: 48%;
 }
 
 .course button:active {
@@ -91,8 +90,8 @@ h1 {
 }
 
 .course .play-btn {
-    padding: 8px 18px 8px 18px; ;
-    margin-right: 27px;
+    padding: 8px 17px 8px 17px; ;
+    margin-right: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
     border: none;
@@ -105,8 +104,8 @@ h1 {
 }
 
 .course .stop-btn {
-    padding: 8px 18px 8px 18px; ;
-    margin-right: 27px;
+    padding: 8px 17px 8px 17px; ;
+    margin-right: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
     border: none;
@@ -142,8 +141,8 @@ h1 {
     margin-top: 20px;
 }
 .add-notes-btn{
-    padding: 8px 16px  8px 16px;
-    margin-right: 27px;
+    padding: 8px 15px 8px 15px; ;
+    margin-right: 25px;
     margin-top: 5px;
     margin-bottom: 5px;
     border: none;
@@ -230,7 +229,7 @@ h1 {
     float: right;
     font-size: 25px;
     font-weight: bold;
-    margin-left: 15px;
+    margin-left: 10px;
     top: 0px;
 }
 
@@ -259,7 +258,7 @@ h1 {
     to {transform: scale(1)}
   }
 
-@media (max-width: 600px) {
+@media (max-width: 850px) {
     .add-course input {
         width: 200px;
     }
@@ -271,5 +270,9 @@ h1 {
 
     .course h3 {
         margin-bottom: 10px;
+        max-width: 100%;
+    }
+    .time-info{
+        width: 100%;
     }
 }

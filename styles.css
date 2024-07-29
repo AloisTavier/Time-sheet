@@ -9,7 +9,6 @@ body {
     display: flex;
     flex-direction: column;
     max-height: 34px;
-    width: 95%;
     border: 1px solid #bebebe;
     border-radius: 5px;
     padding: 5px;
@@ -27,6 +26,13 @@ body {
     background: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.time-info{
+    width: 50%;
+}
+.time{
+    font-weight: bold;
+    font-size: large;
 }
 h1 {
     text-align: center;
@@ -77,7 +83,7 @@ h1 {
 
 .course h3 {
     margin: 5px 0px 5px 0px;
-    max-width: 50%;
+    max-width: 45%;
 }
 
 .course button:active {
@@ -85,8 +91,8 @@ h1 {
 }
 
 .course .play-btn {
-    padding: 8px 17px 8px 17px; ;
-    margin-right: 20px;
+    padding: 8px 18px 8px 18px; ;
+    margin-right: 27px;
     margin-top: 5px;
     margin-bottom: 5px;
     border: none;
@@ -99,8 +105,8 @@ h1 {
 }
 
 .course .stop-btn {
-    padding: 8px 17px 8px 17px; ;
-    margin-right: 20px;
+    padding: 8px 18px 8px 18px; ;
+    margin-right: 27px;
     margin-top: 5px;
     margin-bottom: 5px;
     border: none;
@@ -136,8 +142,8 @@ h1 {
     margin-top: 20px;
 }
 .add-notes-btn{
-    padding: 8px 15px  8px 15px;
-    margin-right: 20px;
+    padding: 8px 16px  8px 16px;
+    margin-right: 27px;
     margin-top: 5px;
     margin-bottom: 5px;
     border: none;

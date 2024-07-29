@@ -9,12 +9,12 @@ body {
     display: flex;
     flex-direction: column;
     max-height: 34px;
+    width: 93%;
     border: 1px solid #bebebe;
     border-radius: 5px;
-    padding: 5px;
+    padding: 6px 10px 6px 10px;
     margin: 5px 0px 5px 0px;
     font-size: small;
-    text-indent: 5px;
     overflow: auto;
     color: #000000;
     background-color: #f4f4f4;

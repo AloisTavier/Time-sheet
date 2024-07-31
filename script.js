@@ -140,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             totalSeconds += time_passed;
             updateTimeDisplay(course.seconds, timeSpan);
             updateTimeDisplay(totalSeconds, totalTimeSpan);
+            updatelocalStorage();
         }, 1000);
     }
 

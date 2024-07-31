@@ -1,15 +1,24 @@
+const addCourseBtn = document.getElementById('add-course-btn');
+const coursesList = document.getElementById('courses-list');
+const totalTimeSpan = document.getElementById('total-time');
+const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+
+let totalSeconds = 0;
+let start_time = 0;
+let current_time = 0;
+let number_of_plays = 0;
+let courses = JSON.parse(localStorage.getItem('courses')) || {};
+
+let timeChart = null; // Initialisation de la variable
 document.addEventListener('DOMContentLoaded', () => {
-    const addCourseBtn = document.getElementById('add-course-btn');
-    const coursesList = document.getElementById('courses-list');
-    const totalTimeSpan = document.getElementById('total-time');
-
-    let totalSeconds = 0;
-    let start_time = 0;
-    let current_time = 0;
-    let number_of_plays = 0;
-    const courses = {};
-    let timeChart = null; // Initialisation de la variable
-
+    for (const name in courses) {
+        addexistingCourses(name, courses[name].seconds, courses[name].interval, courses[name].notes, courses[name].history);
+        totalSeconds += courses[name].seconds;
+        updateTimeDisplay(courses[name].seconds, document.querySelector(`[data-course="${name}"] .time`));
+        updateTimeDisplay(totalSeconds, totalTimeSpan);
+        // displayNotes(courses[name], document.getElementById("course-${name}"));
+        
+    }
     addCourseBtn.addEventListener('click', () => {
         const courseName = document.getElementById('course-name').value;
         if (courseName && !courses[courseName]) {
@@ -17,7 +26,44 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('course-name').value = '';
         }
     });
+    function addexistingCourses(name, les_secondes, intervalle, les_notes, historique) {
+        const course = {
+            name,
+            seconds: les_secondes,
+            interval: intervalle,
+            notes: les_notes,
+            history: historique
+        };
+        courses[name] = course;
 
+        const courseElement = document.createElement('div');
+        courseElement.classList.add('course');
+        courseElement.setAttribute('data-course', name);
+        courseElement.innerHTML = `
+            <h3>${name}</h3>
+            <div class="time-info" id="course-${name}">
+                <button class="play-btn" title="Lance le chronomètre pour le cours">Play</button>
+                <button class="stop-btn" title="Arrête le chronomètre pour le cours" disabled>Stop</button>
+                <button class="add-notes-btn" title="Ajouter une note à propos de la session de travail">Notes</button>
+                <span class="time">0:00:00</span>
+                <button class="close-course" id="close-course-${name}">&times;</button>
+                <div class="notes-container" style="display:none">Commentaires : <br></div>
+            </div>
+        `;
+
+        const playBtn = courseElement.querySelector('.play-btn');
+        const stopBtn = courseElement.querySelector('.stop-btn');
+        const closeBtn = courseElement.querySelector('.close-course');
+        const timeSpan = courseElement.querySelector('.time');
+        const notesBtn = courseElement.querySelector('.add-notes-btn');
+
+        playBtn.addEventListener('click', () => startTimer(course, timeSpan, playBtn, stopBtn));
+        stopBtn.addEventListener('click', () => stopTimer(course, playBtn, stopBtn, courseElement));
+        closeBtn.addEventListener('click', () => removeCourse(name, courseElement));
+        notesBtn.addEventListener('click', () => addNotes(course, courseElement));
+
+        coursesList.appendChild(courseElement);
+    }
     function addCourse(name) {
         const course = {
             name,
@@ -56,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         notesBtn.addEventListener('click', () => addNotes(course, courseElement));
 
         coursesList.appendChild(courseElement);
+        updatelocalStorage();
     }
 
     function removeCourse(name, courseElem) {
@@ -69,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             totalSeconds = 0;
             updateTimeDisplay(totalSeconds, totalTimeSpan);
         }
+        updatelocalStorage();
     }
 
     function startTimer(course, timeSpan, playBtn, stopBtn) {
@@ -106,8 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
         playBtn.disabled = false;
         stopBtn.disabled = true;
         clearInterval(course.interval);
-        course.notes.push({ time: new Date(), note: "Temps de travail " + `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} `});
-        displayNotes(course, courseElement);
+        // course.notes.push({ time: new Date(), note: "Temps de travail " + `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} `});
+        // displayNotes(course, courseElement);
+        addNotes(course, courseElement, "Temps de travail " + `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} `);
+        updatelocalStorage();
     }
 
     function updateTimeDisplay(seconds, element) {
@@ -118,12 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function addNotes(course, courseElement, text_note = null) {
-        const notes = prompt('Ajouter des notes pour cette session :');
+        const date = new Date();
+        let text_time = `${date.getDate()} ${months[date.getMonth()]} ${date.getHours()}h${date.getMinutes()} : `;
         if (text_note != null) {
-            course.notes.push({ time: new Date(), note: text_note });
+            text_note = text_time + text_note;
+            course.notes.push({ time: new Date(), note: text_note});
             displayNotes(course, courseElement);
-        }
-        if (notes) {
+        } else {
+            let notes = prompt('Ajouter des notes pour cette session :');
+            notes = text_time + notes;
             course.notes.push({ time: new Date(), note: notes });
             displayNotes(course, courseElement);
         }
@@ -136,9 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
         course.notes.forEach(note => {
             const noteElement = document.createElement('div');
             noteElement.classList.add('note');
-            noteElement.textContent = `${note.time.toLocaleString("fr-BE", { dateStyle: 'long' })} : ${note.note}`;
+            noteElement.textContent = `${note.note}`;
             notesContainer.appendChild(noteElement);
         });
+        updatelocalStorage();
     }
 
     function updatePercentage() {
@@ -197,3 +251,8 @@ document.addEventListener('DOMContentLoaded', () => {
         alertBox.style.display = "none";
     });
 });
+function updatelocalStorage() {
+    const liste_cours = JSON.stringify(courses);
+    console.log(liste_cours);
+    localStorage.setItem('courses', liste_cours);
+}

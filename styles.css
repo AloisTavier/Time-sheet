@@ -257,8 +257,10 @@ h1 {
     from {transform: scale(0)} 
     to {transform: scale(1)}
   }
-
 @media (max-width: 850px) {
+    .container {
+        height: 100%;
+    }
     .add-course input {
         width: 200px;
     }

@@ -1,6 +1,7 @@
 const addCourseBtn = document.getElementById('add-course-btn');
 const coursesList = document.getElementById('courses-list');
 const totalTimeSpan = document.getElementById('total-time');
+const pourcents = document.getElementById('popupButton');
 const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 
 let totalSeconds = 0;
@@ -256,4 +257,33 @@ function updatelocalStorage() {
     const liste_cours = JSON.stringify(courses);
     console.log(liste_cours);
     localStorage.setItem('courses', liste_cours);
+}
+const bodyE1 = document.querySelector("body");
+const containerE1 = document.querySelector(".container");
+let les_cours = document.querySelector(".course");
+
+const inputE1 = document.querySelector(".input");
+inputE1.checked = JSON.parse(localStorage.getItem("mode")) || false;
+updateBody();
+function updateBody() {
+    les_cours = document.querySelector(".course");
+    console.log(les_cours);
+    if (inputE1.checked) {
+        bodyE1.style.background = "rgb(190, 190, 190)";
+        containerE1.style.background = "rgb(220, 220, 220)";
+        pourcents.style.background = "rgb(200, 200, 200)";
+
+    } else {
+        bodyE1.style.background = "#efefef";
+        containerE1.style.background = "white";
+        pourcents.style.background = "rgb(230, 230, 230)";
+    }
+}
+
+inputE1.addEventListener("input", () => {
+    updateBody();
+    updatestorage();
+});
+function updatestorage(){
+    localStorage.setItem("mode", JSON.stringify(inputE1.checked));
 }

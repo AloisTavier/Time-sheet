@@ -16,7 +16,7 @@ body {
     font-size: small;
     overflow: auto;
     color: #000000;
-    background-color: #f4f4f4;
+    background-color: #e7e7e7;
 }
 .container {
     max-width: 800px;
@@ -77,13 +77,20 @@ h1 {
     padding: 5px 10px 5px 15px;
     border: 1px solid #adadad;
     border-radius: 4px;
-    background: #fff;
+    background:#f6f6f6;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.139);
+    transition: transform 0.35s ease;
 }
 .course:hover {
-    background:#f6f6f6;
+    background:#ffffff;
+    transform: scale3d(1.007, 1.01, 1.01);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.242);
 }
 .course:hover .close-course{
-    background:#f6f6f6;
+    background:#ffffff;
+}
+.course:hover .notes-container{
+    background:#f3f3f3;
 }
 
 .course h3 {
@@ -214,7 +221,7 @@ h1 {
 
 }
 .close-course{
-    background: white;
+    background: #f6f6f6;
     border: none;
     color: #aaa;
     float: right;
@@ -226,8 +233,14 @@ h1 {
 }
 .close-course:hover,
 .close-course:focus {
-    color: black;
+    color: rgb(27, 27, 27);
     text-decoration: none;
+    cursor: pointer;
+}
+.close-course:active {
+    color: rgb(27, 27, 27);
+    text-decoration: none;
+    transform: scale(0.95);
     cursor: pointer;
 }
 .close {
@@ -269,7 +282,8 @@ h1 {
     width: 38px;
     height: 20px;;
     border-radius: 30px;
-    background-color: rgb(196, 196, 196);
+    border: 1px solid rgb(196, 196, 196);
+    background-color: rgb(210, 210, 210);
     cursor: pointer;
 }
 .input{
@@ -287,11 +301,11 @@ h1 {
     animation: toggleOff 0.4s linear forwards;
 }
 .input:checked + .label {
-    background-color: rgb(180, 180, 180);
+    background-color: rgb(255, 255, 255);
 }
 .input:checked + .label .circle{
     animation: toggleOn 0.4s linear forwards;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(210, 210, 210);
 }
 @keyframes toggleOn{
     0%{

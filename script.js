@@ -270,8 +270,8 @@ function updateBody() {
     console.log(les_cours);
     if (inputE1.checked) {
         bodyE1.style.background = "rgb(190, 190, 190)";
-        containerE1.style.background = "rgb(220, 220, 220)";
-        pourcents.style.background = "rgb(200, 200, 200)";
+        containerE1.style.background = "rgb(225, 225, 225)";
+        pourcents.style.background = "rgb(250, 250, 250)";
 
     } else {
         bodyE1.style.background = "#efefef";

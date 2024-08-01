@@ -296,8 +296,8 @@ function updateBody() {
         containerE1.style.background = "white";
         pourcents.style.background = "rgb(230, 230, 230)";
         pourcents.style.color = "black";
-        h1title.style.color = "black";
         h2title.style.color = "black";
+        h1title.style.color = "black";
         input_course.style.backgroundColor = "white";
         input_course.style.color = "black";
         chartcolor = "rgb(30, 30, 30)";

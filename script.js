@@ -1,7 +1,10 @@
 const addCourseBtn = document.getElementById('add-course-btn');
+const input_course = document.getElementById('course-name');
 const coursesList = document.getElementById('courses-list');
 const totalTimeSpan = document.getElementById('total-time');
 const pourcents = document.getElementById('popupButton');
+const h1title = document.querySelector('h1');
+const h2title = document.querySelector('h2');
 const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 
 let totalSeconds = 0;
@@ -9,8 +12,10 @@ let start_time = 0;
 let current_time = 0;
 let number_of_plays = 0;
 let courses = JSON.parse(localStorage.getItem('courses')) || {};
+let chartcolor = "rgb(30, 30, 30)";
 
 let timeChart = null; // Initialisation de la variable
+let r = document.querySelector(':root');
 document.addEventListener('DOMContentLoaded', () => {
     for (const name in courses) {
         addexistingCourses(name, courses[name].seconds, courses[name].interval, courses[name].notes, courses[name].history);
@@ -235,7 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             },
             options: {
-                scales: {}
+                scales: {},
+                color: chartcolor,
             }
         });
     }
@@ -269,14 +275,37 @@ function updateBody() {
     les_cours = document.querySelector(".course");
     console.log(les_cours);
     if (inputE1.checked) {
-        bodyE1.style.background = "rgb(190, 190, 190)";
-        containerE1.style.background = "rgb(225, 225, 225)";
-        pourcents.style.background = "rgb(250, 250, 250)";
+        bodyE1.style.background = "black";
+        containerE1.style.background = "rgb(30, 30, 30)";
+        pourcents.style.background = "rgb(50, 50, 50)";
+        pourcents.style.color = "white";
+        h1title.style.color = "white";
+        h2title.style.color = "white";
+        input_course.style.backgroundColor = "rgb(60, 60, 60)";
+        input_course.style.color = "white";
+        chartcolor = "white";
+        r.style.setProperty('--BackColor', "rgb(50, 50, 50)");
+        r.style.setProperty('--course-color', 'white');
+        r.style.setProperty('--course-color-hover', 'white');
+        r.style.setProperty('--BackColor-hover', "rgb(57, 57, 57)");
+        r.style.setProperty('--shadow-color', "rgb(255, 255, 255, 0.5)");
+
 
     } else {
         bodyE1.style.background = "#efefef";
         containerE1.style.background = "white";
         pourcents.style.background = "rgb(230, 230, 230)";
+        pourcents.style.color = "black";
+        h1title.style.color = "black";
+        h2title.style.color = "black";
+        input_course.style.backgroundColor = "white";
+        input_course.style.color = "black";
+        chartcolor = "rgb(30, 30, 30)";
+        r.style.setProperty('--BackColor', 'rgb(245, 245, 245)');
+        r.style.setProperty('--course-color', 'black');
+        r.style.setProperty('--course-color-hover', 'black');
+        r.style.setProperty('--BackColor-hover', "white");
+        r.style.setProperty('--shadow-color', "rgb(0, 0, 0, 0.18)");
     }
 }
 

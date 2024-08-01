@@ -5,6 +5,13 @@ body {
     margin: 0;
     padding: 0;
 }
+:root {
+    --shadow-color: rgba(0, 0, 0, 0.178);
+    --BackColor: rgb(245, 245, 245);
+    --BackColor-hover: white;
+    --course-color: #333333;
+    --course-color-hover: #333333;
+  }
 .notes-container{
     display: flex;
     flex-direction: column;
@@ -24,7 +31,7 @@ body {
     padding: 45px;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 10px var(--shadow-color);
 }
 .time-info{
     width: 49%;
@@ -77,20 +84,23 @@ h1 {
     padding: 5px 10px 5px 15px;
     border: 1px solid #adadad;
     border-radius: 4px;
-    background:#f6f6f6;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.139);
-    transition: transform 0.35s ease;
+    background: var(--BackColor);
+    color: var(--course-color);
+    /* background:#f6f6f6; */
+    box-shadow: 0px 1px 4px var(--shadow-color);
+    transition: transform 0.3s;
 }
 .course:hover {
-    background:#ffffff;
-    transform: scale3d(1.007, 1.01, 1.01);
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.242);
+    background-color: var(--BackColor-hover);
+    color: var(--course-color-hover);
+    transform: scale3d(1.007, 1.012, 1.01);
+    box-shadow: 0px 1px 4px var(--shadow-color);
 }
 .course:hover .close-course{
-    background:#ffffff;
+    background:var(--BackColor-hover);
 }
 .course:hover .notes-container{
-    background:#f3f3f3;
+    background:#ebebeb;
 }
 
 .course h3 {
@@ -210,7 +220,7 @@ h1 {
 }
 
 .custom-alert-content {
-    background-color: #fefefe;
+    background-color: var(--BackColor);
     margin: 80px auto;
     padding: 30px;
     border: 1px solid #888;
@@ -221,7 +231,7 @@ h1 {
 
 }
 .close-course{
-    background: #f6f6f6;
+    background: var(--BackColor);
     border: none;
     color: #aaa;
     float: right;
@@ -230,10 +240,12 @@ h1 {
     margin-left: 15px;
     padding: 1px 5px 0px 5px;
     top: 0px;
+    transition: transform 0.35s;
 }
 .close-course:hover,
 .close-course:focus {
-    color: rgb(27, 27, 27);
+    background-color: var(--BackColor-hover);
+    color: var(--course-color-hover);
     text-decoration: none;
     cursor: pointer;
 }
@@ -254,13 +266,13 @@ h1 {
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: var(--course-color-hover);
     text-decoration: none;
     cursor: pointer;
 }
 
 #alertMessage {
-    color: #2762a0;
+    color: var(--course-color)
 }
 .animate {
     -webkit-animation: animatezoom 0.5s;
@@ -301,11 +313,11 @@ h1 {
     animation: toggleOff 0.4s linear forwards;
 }
 .input:checked + .label {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(202, 202, 202);
 }
 .input:checked + .label .circle{
     animation: toggleOn 0.4s linear forwards;
-    background-color: rgb(210, 210, 210);
+    background-color: rgb(30, 30, 30);
 }
 @keyframes toggleOn{
     0%{

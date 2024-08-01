@@ -356,3 +356,45 @@ h1 {
         width: 100%;
     }
 }
+@media (max-width: 500px) {
+    .container {
+        height: 100%;
+    }
+    .add-course input {
+        width: 200px;
+    }
+    .course .play-btn{
+        padding: 6px 8px 6px 8px;
+        margin-right: 8px;
+    }
+    .course .stop-btn{
+        width: fit-content;
+        padding: 6px 8px 6px 8px;
+        margin-right: 8px;
+    }
+    .add-notes-btn{
+        width: fit-content;
+        padding: 6px 8px 6px 8px;
+        margin-right: 8px;
+    }
+    .time {
+        font-size: medium;
+        margin: 0;
+    }
+    .close-course{
+        padding: 0;
+        transform: translate(-6px, -34px);
+    }
+    .course {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .course h3 {
+        margin-bottom: 10px;
+        max-width: 100%;
+    }
+    .time-info{
+        width: 100%;
+    }
+}

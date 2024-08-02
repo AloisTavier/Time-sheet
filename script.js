@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const name in courses) {
             const course = courses[name];
             const number_sessions = course.history.length;
-            const average_session = number_sessions > 0 ? Math.round(course.history.reduce((a, b) => a + b) / number_sessions) : 0;
+            const average_session = number_sessions > 0 ? Math.round(course.seconds / number_sessions) : 0;
             const average_session_hours = Math.floor(average_session / 3600);
             const average_session_minutes = Math.floor((average_session % 3600) / 60);
             const average_session_seconds = average_session % 60;

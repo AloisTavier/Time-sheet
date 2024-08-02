@@ -7,6 +7,7 @@ body {
 }
 :root {
     --shadow-color: rgba(0, 0, 0, 0.178);
+    --shadow-color2: rgba(0, 0, 0, 0.2);
     --BackColor: rgb(245, 245, 245);
     --BackColor-hover: white;
     --course-color: #333333;
@@ -14,6 +15,8 @@ body {
     --stats-color: #1e1e1e;
     --stats-back-color: #5fa6f3;
     --stats-back-color-hover: #7ab3fc;
+    --notes-back-color: #dddddd;
+    --notes-back-color-hover:  #eaeaea;
   }
 .notes-container{
     display: flex;
@@ -25,8 +28,8 @@ body {
     margin: 7px 5px 7px 0px;
     font-size: small;
     overflow: auto;
-    color: #000000;
-    background-color: #e7e7e7;
+    color: var(--course-color);
+    background-color: var(--notes-back-color);
 }
 .container {
     max-width: 800px;
@@ -63,7 +66,7 @@ h1 {
     margin-left: 10px;
     border: none;
     background-color: #28a745;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s, background-color 0.3s ease;
     color: white;
     border-radius: 4px;
     cursor: pointer;
@@ -72,7 +75,7 @@ h1 {
 
 .add-course button:hover {
     background-color:  #2ab54b;
-    transform: scale(1.04);
+    transform: scale(1.03);
 }
 
 .add-course button:active {
@@ -89,21 +92,21 @@ h1 {
     border-radius: 4px;
     background: var(--BackColor);
     color: var(--course-color);
-    /* background:#f6f6f6; */
-    box-shadow: 0px 1px 4px var(--shadow-color);
+    box-shadow: 0px 1px 4px var(--shadow-color2);
     transition: transform 0.3s;
 }
 .course:hover {
     background-color: var(--BackColor-hover);
     color: var(--course-color-hover);
     transform: scale3d(1.007, 1.012, 1.01);
-    box-shadow: 0px 1px 4px var(--shadow-color);
+    box-shadow: 0px 1px 4px var(--shadow-color2);
 }
 .course:hover .close-course{
     background:var(--BackColor-hover);
 }
 .course:hover .notes-container{
-    background:#ebebeb;
+    background:var(--notes-back-color-hover);
+    color:var(--course-color-hover);
 }
 
 .course h3 {
@@ -243,7 +246,7 @@ h1 {
     margin-left: 15px;
     padding: 1px 5px 0px 5px;
     top: 0px;
-    transition: transform 0.35s;
+    transition: transform 0.35s ease;
 }
 .close-course:hover,
 .close-course:focus {
@@ -275,15 +278,14 @@ h1 {
     cursor: pointer;
 }
 .statistics {
-    /* color: #ffffff; */
     color: var(--stats-color);
     font-size: 15px;
     font-weight: bold;
     background-color: var(--stats-back-color);
-    /* background-color: #2172c8; */
+    box-shadow: 0px 1px 4px var(--shadow-color2);
     padding: 10px 20px;
     margin: 15px 15px 15px 0px;
-    transition: transform 0.2s ease;
+    transition: font-size 0.1s ease;
     border: none;
     border-radius: 4px;
 }
@@ -292,7 +294,14 @@ h1 {
 .statistics:focus {
     color: var(--stats-color);
     background-color: var(--stats-back-color-hover);
-    transform: scale(1.02);
+    font-size: 15.3px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.statistics:active {
+    color: var(--stats-color);
+    background-color: var(--stats-back-color-hover);
+    font-size: 14.9px;
     text-decoration: none;
     cursor: pointer;
 }
@@ -337,13 +346,13 @@ h1 {
     border-radius: 50%;
     top: 2.5px;
     left: 2.5px;
-    animation: toggleOff 0.4s linear forwards;
+    animation: toggleOff 0.3s linear forwards;
 }
 .input:checked + .label {
     background-color: rgb(202, 202, 202);
 }
 .input:checked + .label .circle{
-    animation: toggleOn 0.4s linear forwards;
+    animation: toggleOn 0.3s linear forwards;
     background-color: rgb(30, 30, 30);
 }
 @keyframes toggleOn{
@@ -387,7 +396,7 @@ h1 {
     .container {
         height: 100%;
         margin: 0;
-        padding: 25px;
+        padding: 40px 25px 25px 25px;
         border-radius: 0;
         border: none;
     }

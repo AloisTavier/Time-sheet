@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
         courseElement.innerHTML = `
             <h3>${name}</h3>
             <div class="time-info">
-                <button class="play-btn" title="Lance le chronomètre pour le cours">Play</button>
-                <button class="stop-btn" title="Arrête le chronomètre pour le cours" disabled>Stop</button>
-                <button class="add-notes-btn" title="Ajouter une note à propos de la session de travail">Notes</button>
+                <button class="play-btn" title="Lancer le chronomètre pour le cours">Play</button>
+                <button class="stop-btn" title="Arrêter le chronomètre pour le cours" disabled>Stop</button>
+                <button class="add-notes-btn" title="Ajouter une note à propos de ta session de travail">Notes</button>
                 <span class="time">0:00:00</span>
                 <button class="close-course" id="close-course-${name}">&times;</button>
                 <div class="notes-container" style="display:none">Commentaires : <br></div>
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addNotes(course, courseElement, text_note = null) {
         const date = new Date();
-        let text_time = `${date.getDate()} ${months[date.getMonth()]} ${date.getHours()}h${date.getMinutes()} : `;
+        let text_time = `${date.getDate()} ${months[date.getMonth()]} ${date.getHours().toString().padStart(2, '0')}h${date.getMinutes().toString().padStart(2, '0')} : `;
         if (text_note != null) {
             text_note = text_time + text_note;
             course.notes.push({ time: new Date(), note: text_note});
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const name in courses) {
             const course = courses[name];
             const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
-            alert_Message_container.innerHTML += `${name}` + "  :  " + `${percentage}% du temps total <br><br>`;
+            alert_Message_container.innerHTML += `${name}` + "  :  " + `${percentage}%<br><br>`;
             alertBox.style.display = "block";
         }
 
@@ -306,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert_Message_container.innerHTML = "";
         const alertBox = document.getElementById("customAlertBox");
         alertBox.style.display = "none";
+        stats_mode = 0;
     });
     const statistics = document.querySelector('.statistics');
     statistics.addEventListener('click', function () {
@@ -346,11 +347,15 @@ function updateBody() {
         r.style.setProperty('--BackColor', "rgb(50, 50, 50)");
         r.style.setProperty('--course-color', 'white');
         r.style.setProperty('--course-color-hover', 'white');
-        r.style.setProperty('--BackColor-hover', "rgb(57, 57, 57)");
-        r.style.setProperty('--shadow-color', "rgb(255, 255, 255, 0.5)");
+        r.style.setProperty('--BackColor-hover', "rgb(59, 59, 59)");
+        r.style.setProperty('--shadow-color', "rgb(255, 255, 255, 0.3)");
+        r.style.setProperty('--shadow-color2', "rgb(0, 0, 0, 0.38)");
         r.style.setProperty('--stats-color', "rgb(235, 235, 235)");
         r.style.setProperty('--stats-back-color', "#2172c8");
         r.style.setProperty('--stats-back-color-hover', "#2f7fd5")
+        r.style.setProperty('--notes-back-color-hover', "#575757")
+        r.style.setProperty('--notes-back-color', "#515151")
+
 
 
 
@@ -369,9 +374,12 @@ function updateBody() {
         r.style.setProperty('--course-color-hover', 'black');
         r.style.setProperty('--BackColor-hover', "white");
         r.style.setProperty('--shadow-color', "rgb(0, 0, 0, 0.18)");
+        r.style.setProperty('--shadow-color2', "rgb(0, 0, 0, 0.18)");
         r.style.setProperty('--stats-color', "#1e1e1e");
         r.style.setProperty('--stats-back-color', "#5fa6f3");
         r.style.setProperty('--stats-back-color-hover', "#7ab3fc")
+        r.style.setProperty('--notes-back-color-hover', "#eaeaea")
+        r.style.setProperty('--notes-back-color', "#dddddd")
     }
 }
 

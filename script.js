@@ -352,12 +352,9 @@ function updateBody() {
         r.style.setProperty('--shadow-color2', "rgb(0, 0, 0, 0.38)");
         r.style.setProperty('--stats-color', "rgb(235, 235, 235)");
         r.style.setProperty('--stats-back-color', "#2172c8");
-        r.style.setProperty('--stats-back-color-hover', "#2f7fd5")
-        r.style.setProperty('--notes-back-color-hover', "#575757")
-        r.style.setProperty('--notes-back-color', "#515151")
-
-
-
+        r.style.setProperty('--stats-back-color-hover', "#2f7fd5");
+        r.style.setProperty('--notes-back-color-hover', "#575757");
+        r.style.setProperty('--notes-back-color', "#515151");
 
     } else {
         bodyE1.style.background = "#efefef";
@@ -377,9 +374,9 @@ function updateBody() {
         r.style.setProperty('--shadow-color2', "rgb(0, 0, 0, 0.18)");
         r.style.setProperty('--stats-color', "#1e1e1e");
         r.style.setProperty('--stats-back-color', "#5fa6f3");
-        r.style.setProperty('--stats-back-color-hover', "#7ab3fc")
-        r.style.setProperty('--notes-back-color-hover', "#eaeaea")
-        r.style.setProperty('--notes-back-color', "#dddddd")
+        r.style.setProperty('--stats-back-color-hover', "#7ab3fc");
+        r.style.setProperty('--notes-back-color-hover', "#eaeaea");
+        r.style.setProperty('--notes-back-color', "#dddddd");
     }
 }
 

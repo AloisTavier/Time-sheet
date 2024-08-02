@@ -4,6 +4,7 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 :root {
     --shadow-color: rgba(0, 0, 0, 0.178);
@@ -38,6 +39,7 @@ body {
     background: white;
     border-radius: 8px;
     box-shadow: 0 0px 10px var(--shadow-color);
+    position: relative;
 }
 .time-info{
     width: 49%;
@@ -354,6 +356,19 @@ h1 {
 .input:checked + .label .circle{
     animation: toggleOn 0.3s linear forwards;
     background-color: rgb(30, 30, 30);
+}
+#link-mail{
+    /* color: #007bff; */
+    text-decoration: none;
+    text-decoration: none;
+    color:rgb(122, 122, 122);
+    font-size:7px;
+    position:absolute;
+    bottom:15px;
+    left:20px;
+}
+#link-mail:hover{
+    color: #007bff;
 }
 @keyframes toggleOn{
     0%{

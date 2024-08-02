@@ -11,6 +11,9 @@ body {
     --BackColor-hover: white;
     --course-color: #333333;
     --course-color-hover: #333333;
+    --stats-color: #1e1e1e;
+    --stats-back-color: #5fa6f3;
+    --stats-back-color-hover: #7ab3fc;
   }
 .notes-container{
     display: flex;
@@ -221,8 +224,8 @@ h1 {
 
 .custom-alert-content {
     background-color: var(--BackColor);
-    margin: 80px auto;
-    padding: 30px;
+    margin: 60px auto;
+    padding: 0px 20px 20px 20px;
     border: 1px solid #888;
     width: 80%;
     max-width: 400px;
@@ -260,13 +263,36 @@ h1 {
     float: right;
     font-size: 25px;
     font-weight: bold;
-    margin-left: 10px;
+    margin-top: 18px;
+    margin-right: 10px;
     top: 0px;
 }
 
 .close:hover,
 .close:focus {
     color: var(--course-color-hover);
+    text-decoration: none;
+    cursor: pointer;
+}
+.statistics {
+    /* color: #ffffff; */
+    color: var(--stats-color);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--stats-back-color);
+    /* background-color: #2172c8; */
+    padding: 10px 20px;
+    margin: 15px 15px 15px 0px;
+    transition: transform 0.2s ease;
+    border: none;
+    border-radius: 4px;
+}
+
+.statistics:hover,
+.statistics:focus {
+    color: var(--stats-color);
+    background-color: var(--stats-back-color-hover);
+    transform: scale(1.02);
     text-decoration: none;
     cursor: pointer;
 }
@@ -357,10 +383,11 @@ h1 {
         width: 100%;
     }
 }
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     .container {
         height: 100%;
         margin: 0;
+        padding: 25px;
         border-radius: 0;
         border: none;
     }
@@ -368,26 +395,26 @@ h1 {
         width: 200px;
     }
     .course .play-btn{
-        padding: 6px 8px 6px 8px;
+        padding: 6px 12px 6px 12px;
         margin-right: 8px;
     }
     .course .stop-btn{
         width: fit-content;
-        padding: 6px 8px 6px 8px;
+        padding: 6px 12px 6px 12px;
         margin-right: 8px;
     }
     .add-notes-btn{
         width: fit-content;
-        padding: 6px 8px 6px 8px;
+        padding: 6px 10px 6px 10px;
         margin-right: 8px;
     }
     .time {
-        font-size: medium;
+        font-size: large;
         margin: 0;
     }
     .close-course{
         padding: 0;
-        transform: translate(-6px, -36px);
+        translate: -6px -36px; ;
     }
     .course {
         flex-direction: column;

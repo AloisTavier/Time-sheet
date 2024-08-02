@@ -6,6 +6,7 @@ const pourcents = document.getElementById('popupButton');
 const h1title = document.querySelector('h1');
 const h2title = document.querySelector('h2');
 const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+let stats_mode = 0;
 
 let totalSeconds = 0;
 let start_time = 0;
@@ -164,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // course.notes.push({ time: new Date(), note: "Temps de travail " + `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} `});
         // displayNotes(course, courseElement);
         addNotes(course, courseElement, "Temps de travail " + `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} `);
+        course.history.push(session_duration);
         updatelocalStorage();
     }
 
@@ -201,7 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         updatelocalStorage();
     }
-
     function updatePercentage() {
         let alertBox = document.getElementById("customAlertBox");
         let alert_Message_container = document.getElementById("alertMessage");
@@ -210,7 +211,55 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const name in courses) {
             const course = courses[name];
             const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
-            alert_Message_container.innerHTML += `${name}` + "  :  " + `${percentage}%` + "<br><br>";
+            alert_Message_container.innerHTML += `${name}` + "  :  " + `${percentage}% du temps total <br><br>`;
+            alertBox.style.display = "block";
+        }
+
+        const courseNames = Object.keys(courses);
+        const timeSpent = courseNames.map(name => courses[name].seconds / 3600); // Convertir les secondes en heures
+
+
+        if (timeChart) {
+            console.log("Destroying existing chart"); // Ajouter un log pour vérifier
+            try {
+                timeChart.destroy(); // Détruire le graphique existant avant d'en créer un nouveau
+            } catch (error) {
+                console.error("Error destroying chart:", error); // Capturer les erreurs de destruction
+            }
+        }
+
+        const ctx = document.getElementById('timeChart').getContext('2d');
+
+        timeChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: courseNames,
+                datasets: [{
+                    label: 'Temps passé (heures)',
+                    data: timeSpent,
+                    borderWidth: 0.5
+                }]
+            },
+            options: {
+                scales: {},
+                color: chartcolor,
+            }
+        });
+    }
+    function updatePercentage2() {
+        let alertBox = document.getElementById("customAlertBox");
+        let alert_Message_container = document.getElementById("alertMessage");
+
+        alert_Message_container.innerHTML = "<h3>Pourcentage de travail par cours</h3>";
+        for (const name in courses) {
+            const course = courses[name];
+            const number_sessions = course.history.length;
+            const average_session = number_sessions > 0 ? Math.round(course.history.reduce((a, b) => a + b) / number_sessions) : 0;
+            const average_session_hours = Math.floor(average_session / 3600);
+            const average_session_minutes = Math.floor((average_session % 3600) / 60);
+            const average_session_seconds = average_session % 60;
+            const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
+            alert_Message_container.innerHTML += `${name}` + "  :  " + `<ul> <li>${percentage}% du temps total</li> <li>${number_sessions} sessions de travail</li> <li>Temps moyen ${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</li> </ul> `;
             alertBox.style.display = "block";
         }
 
@@ -258,6 +307,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const alertBox = document.getElementById("customAlertBox");
         alertBox.style.display = "none";
     });
+    const statistics = document.querySelector('.statistics');
+    statistics.addEventListener('click', function () {
+        if (stats_mode == 1) {
+            stats_mode = 0;
+            updatePercentage();
+        } else {
+            stats_mode = 1;
+            updatePercentage2();
+        }
+    });
 });
 function updatelocalStorage() {
     const liste_cours = JSON.stringify(courses);
@@ -289,6 +348,10 @@ function updateBody() {
         r.style.setProperty('--course-color-hover', 'white');
         r.style.setProperty('--BackColor-hover', "rgb(57, 57, 57)");
         r.style.setProperty('--shadow-color', "rgb(255, 255, 255, 0.5)");
+        r.style.setProperty('--stats-color', "rgb(235, 235, 235)");
+        r.style.setProperty('--stats-back-color', "#2172c8");
+        r.style.setProperty('--stats-back-color-hover', "#2f7fd5")
+
 
 
     } else {
@@ -306,6 +369,9 @@ function updateBody() {
         r.style.setProperty('--course-color-hover', 'black');
         r.style.setProperty('--BackColor-hover', "white");
         r.style.setProperty('--shadow-color', "rgb(0, 0, 0, 0.18)");
+        r.style.setProperty('--stats-color', "#1e1e1e");
+        r.style.setProperty('--stats-back-color', "#5fa6f3");
+        r.style.setProperty('--stats-back-color-hover', "#7ab3fc")
     }
 }
 

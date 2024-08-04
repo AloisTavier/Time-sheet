@@ -71,11 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeBtn = courseElement.querySelector('.close-course');
         const timeSpan = courseElement.querySelector('.time');
         const notesBtn = courseElement.querySelector('.add-notes-btn');
+        const timering = courseElement.querySelector('.time');
 
         playBtn.addEventListener('click', () => startTimer(course, timeSpan, playBtn, stopBtn));
         stopBtn.addEventListener('click', () => stopTimer(course, playBtn, stopBtn, courseElement));
         closeBtn.addEventListener('click', () => removeCourse(name, courseElement));
         notesBtn.addEventListener('click', () => addNotes(course, courseElement));
+        timering.addEventListener('click', () => alertetimer());
 
         coursesList.appendChild(courseElement);
     }

@@ -6,17 +6,25 @@ const pourcents = document.getElementById('popupButton');
 const h1title = document.querySelector('h1');
 const h2title = document.querySelector('h2');
 const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-let stats_mode = 0;
+const bodyE1 = document.querySelector("body");
+const containerE1 = document.querySelector(".container");
+const inputE1 = document.querySelector(".input");
+const custom_button = document.getElementById('popupButton');
+const statistics = document.querySelector('.statistics');
+const close_img = document.querySelector('.close');
 
+inputE1.checked = JSON.parse(localStorage.getItem("mode")) || false;
+
+let stats_mode = 0;
 let totalSeconds = 0;
 let start_time = 0;
 let current_time = 0;
 let number_of_plays = 0;
 let courses = JSON.parse(localStorage.getItem('courses')) || {};
 let chartcolor = "rgb(30, 30, 30)";
-
 let timeChart = null; // Initialisation de la variable
 let r = document.querySelector(':root');
+
 document.addEventListener('DOMContentLoaded', () => {
     for (const name in courses) {
         addexistingCourses(name, courses[name].seconds, courses[name].interval, courses[name].notes, courses[name].history);
@@ -102,14 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeBtn = courseElement.querySelector('.close-course');
         const timeSpan = courseElement.querySelector('.time');
         const notesBtn = courseElement.querySelector('.add-notes-btn');
+        const timering = courseElement.querySelector('.time');
 
         playBtn.addEventListener('click', () => startTimer(course, timeSpan, playBtn, stopBtn));
         stopBtn.addEventListener('click', () => stopTimer(course, playBtn, stopBtn, courseElement));
         closeBtn.addEventListener('click', () => removeCourse(name, courseElement));
         notesBtn.addEventListener('click', () => addNotes(course, courseElement));
+        timering.addEventListener('click', () => alertetimer());
 
         coursesList.appendChild(courseElement);
         updatelocalStorage();
+    }
+    function alertetimer(){
+        alert("FORMAT DE L'HEURE :\n   - Heure : Minutes : Secondes\n   - (d) Jours : Heures : Minutes");
     }
 
     function removeCourse(name, courseElem) {
@@ -170,10 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateTimeDisplay(seconds, element) {
-        const hours = Math.floor(seconds / 3600);
+        const days = Math.floor(seconds/86400)
+        const hours = Math.floor((seconds % 86400) / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
         const secs = seconds % 60;
-        element.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        if (seconds < 86400) {
+            element.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        } else {
+            element.textContent = `(d) ${days}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        }
+        
     }
 
     function addNotes(course, courseElement, text_note = null) {
@@ -259,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const average_session_minutes = Math.floor((average_session % 3600) / 60);
             const average_session_seconds = average_session % 60;
             const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
-            alert_Message_container.innerHTML += `${name}` + "  :  " + `<ul> <li>${percentage}% du temps total</li> <li>${number_sessions} sessions de travail</li> <li>Temps moyen ${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</li> </ul> `;
+            alert_Message_container.innerHTML += `<h4>${name} :  </h4>` + `<ul> <li>${percentage}% du temps total</li> <li>${number_sessions} sessions de travail</li> <li>Temps moyen ${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</li> </ul> `;
             alertBox.style.display = "block";
         }
 
@@ -295,12 +314,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const custom_button = document.getElementById('popupButton');
+
     custom_button.addEventListener('click', function () {
         updatePercentage();
     });
 
-    const close_img = document.querySelector('.close');
     close_img.addEventListener('click', function () {
         const alert_Message_container = document.getElementById("alertMessage");
         alert_Message_container.innerHTML = "";
@@ -308,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alertBox.style.display = "none";
         stats_mode = 0;
     });
-    const statistics = document.querySelector('.statistics');
+
     statistics.addEventListener('click', function () {
         if (stats_mode == 1) {
             stats_mode = 0;
@@ -324,16 +342,8 @@ function updatelocalStorage() {
     console.log(liste_cours);
     localStorage.setItem('courses', liste_cours);
 }
-const bodyE1 = document.querySelector("body");
-const containerE1 = document.querySelector(".container");
-let les_cours = document.querySelector(".course");
-
-const inputE1 = document.querySelector(".input");
-inputE1.checked = JSON.parse(localStorage.getItem("mode")) || false;
 updateBody();
 function updateBody() {
-    les_cours = document.querySelector(".course");
-    console.log(les_cours);
     if (inputE1.checked) {
         bodyE1.style.background = "black";
         containerE1.style.background = "rgb(30, 30, 30)";

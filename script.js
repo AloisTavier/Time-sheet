@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     function addexistingCourses(name, les_secondes, intervalle, les_notes, historique) {
+        if (historique instanceof Array){
+            historique = historique.length;
+        }
         const course = {
             name,
             seconds: les_secondes,
@@ -62,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button class="add-notes-btn" title="Ajouter une note à propos de la session de travail">Notes</button>
                 <span class="time">0:00:00</span>
                 <button class="close-course" id="close-course-${name}">&times;</button>
-                <div class="notes-container" style="display:none">Commentaires : <br></div>
+                <div class="notes-container" style="display:none"><b>Notes : </b></div>
             </div>
         `;
 
@@ -72,12 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const timeSpan = courseElement.querySelector('.time');
         const notesBtn = courseElement.querySelector('.add-notes-btn');
         const timering = courseElement.querySelector('.time');
+        const notesContainer = courseElement.querySelector('.notes-container');
 
         playBtn.addEventListener('click', () => startTimer(course, timeSpan, playBtn, stopBtn));
         stopBtn.addEventListener('click', () => stopTimer(course, playBtn, stopBtn, courseElement));
         closeBtn.addEventListener('click', () => removeCourse(name, courseElement));
         notesBtn.addEventListener('click', () => addNotes(course, courseElement));
         timering.addEventListener('click', () => alertetimer());
+        if (course.notes.length > 0) {
+            notesContainer.style.display = 'flex';
+            les_notes.forEach(note => {
+                const noteElement = document.createElement('div');
+                noteElement.classList.add('note');
+                noteElement.textContent = `${note.note}`;
+                notesContainer.appendChild(noteElement);
+            });
+        }  
 
         coursesList.appendChild(courseElement);
     }
@@ -87,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             seconds: 0,
             interval: null,
             notes: [],
-            history: []
+            history: 0
         };
 
         courses[name] = course;
@@ -124,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updatelocalStorage();
     }
     function alertetimer(){
-        alert("FORMAT DE L'HEURE :\n   - Heure : Minutes : Secondes\n   - (d) Jours : Heures : Minutes");
+        alert("FORMAT DE L'HEURE :\n\n   - Heure : Minutes : Secondes\n   - (d) Jours : Heures : Minutes\n");
     }
 
     function removeCourse(name, courseElem) {
@@ -153,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let sessionStart = new Date();
         start_time = sessionStart.getTime();
         current_time = start_time;
+        course.history++;
 
         course.interval = setInterval(() => {
             let current = new Date();
@@ -177,10 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playBtn.disabled = false;
         stopBtn.disabled = true;
         clearInterval(course.interval);
-        // course.notes.push({ time: new Date(), note: "Temps de travail " + `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} `});
-        // displayNotes(course, courseElement);
         addNotes(course, courseElement, "Temps de travail " + `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} `);
-        course.history.push(session_duration);
         updatelocalStorage();
     }
 
@@ -215,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayNotes(course, courseElement) {
         const notesContainer = courseElement.querySelector('.notes-container');
         notesContainer.style.display = 'flex';
-        notesContainer.innerHTML = ''; // Clear previous notes
+        notesContainer.innerHTML = '<b>Notes :</b>'; // Clear previous notes
         course.notes.forEach(note => {
             const noteElement = document.createElement('div');
             noteElement.classList.add('note');
@@ -274,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert_Message_container.innerHTML = "<h3>Pourcentage de travail par cours</h3>";
         for (const name in courses) {
             const course = courses[name];
-            const number_sessions = course.history.length;
+            const number_sessions = course.history;
             const average_session = number_sessions > 0 ? Math.round(course.seconds / number_sessions) : 0;
             const average_session_hours = Math.floor(average_session / 3600);
             const average_session_minutes = Math.floor((average_session % 3600) / 60);

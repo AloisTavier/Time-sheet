@@ -234,10 +234,26 @@ h1 {
     padding: 0px 20px 20px 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 400px;
+    max-width: 450px;
     border-radius: 8px;
     position: relative;
 
+}
+#timeChart{
+    transform: scale(0.85);
+}
+td {
+    padding: 10px 10px;
+    /* background-color: rgb(233, 233, 233); */
+    border-radius: 3px;
+}
+table{
+    font-size: 15px;
+}
+table th {
+    padding: 15px;
+    /* color: rgb(202, 202, 202); */
+    /* background-color: rgb(69, 92, 131); */
 }
 .close-course{
     background: var(--BackColor);
@@ -415,6 +431,9 @@ h1 {
     .time-info{
         width: 100%;
     }
+    table{
+        font-size: 14px;
+    }
 }
 @media (max-width: 570px) {
     .container {
@@ -471,5 +490,25 @@ h1 {
         font-size:6px;
         color:rgb(122, 122, 122);
         text-decoration: none;
+    }
+    table{
+        font-size: 12px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    table th{
+        font-size: 10px;
+        padding: 10px 5px;
+        width: 24%;
+    }
+    table td{
+        font-size: 10px;
+        padding: 10px 5px;
+        width: 24%;
+    }
+    #timeChart{
+        transform: scale(1);
+        margin-bottom: 30px;
+        margin-top: 20px;
     }
 }

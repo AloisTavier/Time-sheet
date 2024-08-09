@@ -18,6 +18,10 @@ body {
     --stats-back-color-hover: #7ab3fc;
     --notes-back-color: #dddddd;
     --notes-back-color-hover:  #eaeaea;
+    --table-color: #333333;
+    --tr-color:rgb(235, 235, 235);
+    --tr-title-color:rgb(205, 205, 205);
+    --td-color:rgb(215, 235, 255);
   }
 .notes-container{
     display: flex;
@@ -249,6 +253,7 @@ td {
 }
 table{
     font-size: 15px;
+    color:var(--table-color);
 }
 table th {
     padding: 15px;

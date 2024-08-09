@@ -12,6 +12,7 @@ const inputE1 = document.querySelector(".input");
 const custom_button = document.getElementById('popupButton');
 const statistics = document.querySelector('.statistics');
 const close_img = document.querySelector('.close');
+const table_stats = document.querySelector('.table_stats');
 
 inputE1.checked = JSON.parse(localStorage.getItem("mode")) || false;
 
@@ -283,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         alert_Message_container.innerHTML = "<h3>Pourcentage de travail par cours</h3>";
         let tabledoc = "";
-        tabledoc += "<table style='width:100%'><colgroup><col span='1' style='background-color: rgb(235, 235, 235)'></colgroup><tr style='background-color:rgb(210, 210, 210);'><td><b>Nom du cours</b></th><td><b>Pourcentage du total</b></th><td><b>Nombre de sessions</b></td><td><b>Temps moyen par session</b></td></tr>";
+        tabledoc += "<table class='table_stats' style='width:100%'><colgroup><col span='1' style='background-color: var(--tr-color)'></colgroup><tr style='background-color:var(--tr-title-color);'><td><b>Nom du cours</b></th><td><b>Pourcentage du total</b></th><td><b>Nombre de sessions</b></td><td><b>Temps moyen par session</b></td></tr>";
         //alert_Message_container.innerHTML += `<table style="width:100%"><tr><th>Cours</th><th>Pourcentage</th><th>Nombre de sessions</th></tr>`;
         for (const name in courses) {
             const course = courses[name];
@@ -294,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const average_session_seconds = average_session % 60;
             const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
             //alert_Message_container.innerHTML += `<tr style="width:100%"><td>${name}</td><td>${percentage}%</td><td>${number_sessions}</td></tr>`;
-            tabledoc += `<tr style='background-color: rgb(235, 235, 235)'><td style='background-color: rgb(215, 235, 255)'><b>${name}</b></td><td style='text-indent:8px'>${percentage} %</td><td style='text-indent:8px'>${number_sessions}</td><td style='text-indent:8px'>${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</td></tr>`;
+            tabledoc += `<tr style='background-color: var(--tr-color)'><td style='background-color: var(--td-color)'><b>${name}</b></td><td style='text-indent:8px'>${percentage} %</td><td style='text-indent:8px'>${number_sessions}</td><td style='text-indent:8px'>${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</td></tr>`;
         }
         tabledoc += "</table>";
         //alert_Message_container.innerHTML += `</table>`;
@@ -384,6 +385,10 @@ function updateBody() {
         r.style.setProperty('--stats-back-color-hover', "#2f7fd5");
         r.style.setProperty('--notes-back-color-hover', "#575757");
         r.style.setProperty('--notes-back-color', "#515151");
+        r.style.setProperty('--table-color', "white");
+        r.style.setProperty('--tr-color', "rgb(90, 90, 90)");
+        r.style.setProperty('--tr-title-color', "rgb(20, 20, 20)");
+        r.style.setProperty('--td-color', "rgb(33, 94, 160)");
 
     } else {
         bodyE1.style.background = "#efefef";
@@ -406,6 +411,10 @@ function updateBody() {
         r.style.setProperty('--stats-back-color-hover', "#7ab3fc");
         r.style.setProperty('--notes-back-color-hover', "#eaeaea");
         r.style.setProperty('--notes-back-color', "#dddddd");
+        r.style.setProperty('--tr-color', "rgb(235, 235, 235)");
+        r.style.setProperty('--tr-title-color', "rgb(205, 205, 205)");
+        r.style.setProperty('--td-color', "rgb(215, 235, 255)");
+        r.style.setProperty('--table-color', "black");
     }
 }
 

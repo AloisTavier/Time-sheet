@@ -246,24 +246,6 @@ document.addEventListener('DOMContentLoaded', () => {
             alert_Message_container.innerHTML += `${name}` + "  :  " + `${percentage}%<br><br>`;
             alertBox.style.display = "block";
         }
-        let tabledoc = "";
-        tabledoc += "<table style='width:100%'><colgroup><col span='1' style='background-color: rgb(235, 235, 235)'></colgroup><tr style='background-color:rgb(210, 210, 210);'><td style=\"width:22%\"><b>Nom du cours</b></th><td style=\"width:25%\"><b>Pourcentage du total</b></th><td style=\"width:25%\"><b>Nombre de sessions</b></td style=\"width:25%\"><td><b>Temps moyen par session</b></td></tr>";
-        //alert_Message_container.innerHTML += `<table style="width:100%"><tr><th>Cours</th><th>Pourcentage</th><th>Nombre de sessions</th></tr>`;
-        for (const name in courses) {
-            const course = courses[name];
-            const number_sessions = course.history;
-            const average_session = number_sessions > 0 ? Math.round(course.seconds / number_sessions) : 0;
-            const average_session_hours = Math.floor(average_session / 3600);
-            const average_session_minutes = Math.floor((average_session % 3600) / 60);
-            const average_session_seconds = average_session % 60;
-            const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
-            //alert_Message_container.innerHTML += `<tr style="width:100%"><td>${name}</td><td>${percentage}%</td><td>${number_sessions}</td></tr>`;
-            tabledoc += `<tr style='background-color: rgb(235, 235, 235)'><td style='background-color: rgb(215, 235, 255)'><b>${name}</b></td><td>${percentage}%</td><td>${number_sessions}</td><td>${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</td></tr>`;
-        }
-        tabledoc += "</table>";
-        //alert_Message_container.innerHTML += `</table>`;
-        alert_Message_container.innerHTML += tabledoc;
-        alertBox.style.display = "block";
         const courseNames = Object.keys(courses);
         const timeSpent = courseNames.map(name => courses[name].seconds / 3600); // Convertir les secondes en heures
 
@@ -300,6 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let alert_Message_container = document.getElementById("alertMessage");
 
         alert_Message_container.innerHTML = "<h3>Pourcentage de travail par cours</h3>";
+        let tabledoc = "";
+        tabledoc += "<table style='width:100%'><colgroup><col span='1' style='background-color: rgb(235, 235, 235)'></colgroup><tr style='background-color:rgb(210, 210, 210);'><td><b>Nom du cours</b></th><td><b>Pourcentage du total</b></th><td><b>Nombre de sessions</b></td><td><b>Temps moyen par session</b></td></tr>";
+        //alert_Message_container.innerHTML += `<table style="width:100%"><tr><th>Cours</th><th>Pourcentage</th><th>Nombre de sessions</th></tr>`;
         for (const name in courses) {
             const course = courses[name];
             const number_sessions = course.history;
@@ -308,9 +293,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const average_session_minutes = Math.floor((average_session % 3600) / 60);
             const average_session_seconds = average_session % 60;
             const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
-            alert_Message_container.innerHTML += `<h4>${name} :  </h4>` + `<ul> <li>${percentage}% du temps total</li> <li>${number_sessions} sessions de travail</li> <li>Temps moyen ${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</li> </ul> `;
-            alertBox.style.display = "block";
+            //alert_Message_container.innerHTML += `<tr style="width:100%"><td>${name}</td><td>${percentage}%</td><td>${number_sessions}</td></tr>`;
+            tabledoc += `<tr style='background-color: rgb(235, 235, 235)'><td style='background-color: rgb(215, 235, 255)'><b>${name}</b></td><td style='text-indent:8px'>${percentage} %</td><td style='text-indent:8px'>${number_sessions}</td><td style='text-indent:8px'>${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</td></tr>`;
         }
+        tabledoc += "</table>";
+        //alert_Message_container.innerHTML += `</table>`;
+        alert_Message_container.innerHTML += tabledoc;
+        alertBox.style.display = "block";
 
         const courseNames = Object.keys(courses);
         const timeSpent = courseNames.map(name => courses[name].seconds / 3600); // Convertir les secondes en heures

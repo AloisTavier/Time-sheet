@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const average_session_seconds = average_session % 60;
             const percentage = totalSeconds > 0 ? Math.round((course.seconds / totalSeconds) * 100) : 0;
             //alert_Message_container.innerHTML += `<tr style="width:100%"><td>${name}</td><td>${percentage}%</td><td>${number_sessions}</td></tr>`;
-            tabledoc += `<tr style='background-color: rgb(235, 235, 235)'><td style='background-color: rgb(215, 235, 255)'><b>${name}</b></td><td style='text-indent:8px'>${percentage} %</td><td style='text-indent:8px'>${number_sessions}</td><td style='text-indent:8px'>${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</td></tr>`;
+            tabledoc += `<tr style='background-color: rgb(235, 235, 235)'><td style='background-color: rgb(214, 234, 254)'><b>${name}</b></td><td style='text-indent:8px'>${percentage} %</td><td style='text-indent:8px'>${number_sessions}</td><td style='text-indent:8px'>${average_session_hours}:${average_session_minutes.toString().padStart(2, '0')}:${average_session_seconds.toString().padStart(2, '0')}</td></tr>`;
         }
         tabledoc += "</table>";
         //alert_Message_container.innerHTML += `</table>`;

@@ -248,17 +248,16 @@ h1 {
 }
 td {
     padding: 10px 10px;
-    /* background-color: rgb(233, 233, 233); */
+    font-size: 14x;
     border-radius: 3px;
 }
 table{
-    font-size: 15px;
+    font-size: 14x;
     color:var(--table-color);
 }
 table th {
-    padding: 15px;
-    /* color: rgb(202, 202, 202); */
-    /* background-color: rgb(69, 92, 131); */
+    padding: 5px 5px 5px 0px;
+    font-size: 14x;
 }
 .close-course{
     background: var(--BackColor);
@@ -303,7 +302,7 @@ table th {
 }
 .statistics {
     color: var(--stats-color);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     background-color: var(--stats-back-color);
     box-shadow: 0px 1px 4px var(--shadow-color2);
@@ -497,17 +496,17 @@ table th {
         text-decoration: none;
     }
     table{
-        font-size: 12px;
+        font-size: 11px;
         padding-left: 0;
         padding-right: 0;
     }
     table th{
-        font-size: 10px;
+        font-size: 11px;
         padding: 10px 5px;
         width: 24%;
     }
     table td{
-        font-size: 10px;
+        font-size: 11px;
         padding: 10px 5px;
         width: 24%;
     }

@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         alert_Message_container.innerHTML = "<h3>Pourcentage de travail par cours</h3>";
         let tabledoc = "";
-        tabledoc += "<table class='table_stats' style='width:100%'><colgroup><col span='1' style='background-color: var(--tr-color)'></colgroup><tr style='background-color:var(--tr-title-color);'><td><b>Nom du cours</b></th><td><b>Pourcentage du total</b></th><td><b>Nombre de sessions</b></td><td><b>Temps moyen par session</b></td></tr>";
+        tabledoc += "<table class='table_stats' style='width:100%; font-size:14px;'><colgroup><col span='1' style='background-color: var(--tr-color)'></colgroup><tr style='background-color:var(--tr-title-color);'><td><b>Nom du cours</b></th><td><b>Pourcentage</b></th><td><b>Nombre de sessions</b></td><td><b>Temps moyen</b></td></tr>";
         //alert_Message_container.innerHTML += `<table style="width:100%"><tr><th>Cours</th><th>Pourcentage</th><th>Nombre de sessions</th></tr>`;
         for (const name in courses) {
             const course = courses[name];

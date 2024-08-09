@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         alert_Message_container.innerHTML = "<h3>Pourcentage de travail par cours</h3>";
         let tabledoc = "";
-        tabledoc += "<table class='table_stats' style='width:100%; font-size:14px;'><colgroup><col span='1' style='background-color: var(--tr-color)'></colgroup><tr style='background-color:var(--tr-title-color);'><td><b>Nom du cours</b></th><td><b>Pourcentage</b></th><td><b>Nombre de sessions</b></td><td><b>Temps moyen</b></td></tr>";
+        tabledoc += "<table class='table_stats' style='width:100%; font-size:14px;'><colgroup><col span='1' style='background-color: var(--tr-color)'></colgroup><tr style='background-color:var(--tr-title-color);'><td style='width:25%;'><b>Nom du cours</b></td><td style='width:25%;'><b>Pourcentage</b></td><td style='width:25%;'><b>Nombre de sessions</b></td><td><b>Temps moyen</b></td></tr>";
         //alert_Message_container.innerHTML += `<table style="width:100%"><tr><th>Cours</th><th>Pourcentage</th><th>Nombre de sessions</th></tr>`;
         for (const name in courses) {
             const course = courses[name];
@@ -411,9 +411,9 @@ function updateBody() {
         r.style.setProperty('--stats-back-color-hover', "#7ab3fc");
         r.style.setProperty('--notes-back-color-hover', "#eaeaea");
         r.style.setProperty('--notes-back-color', "#dddddd");
-        r.style.setProperty('--tr-color', "rgb(235, 235, 235)");
-        r.style.setProperty('--tr-title-color', "rgb(205, 205, 205)");
-        r.style.setProperty('--td-color', "rgb(215, 235, 255)");
+        r.style.setProperty('--tr-color', "rgb(230, 230, 230)");
+        r.style.setProperty('--tr-title-color', "rgb(200, 200, 200)");
+        r.style.setProperty('--td-color', "rgb(200, 230, 255)");
         r.style.setProperty('--table-color', "black");
     }
 }

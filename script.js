@@ -6,6 +6,7 @@ const totalTimeSpan = document.getElementById('total-time');
 const pourcents = document.getElementById('popupButton');
 const h1title = document.querySelector('h1');
 const h2title = document.querySelector('h2');
+console.log(h2title.innerHTML);
 const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 const bodyE1 = document.querySelector("body");
 const containerE1 = document.querySelector(".container");

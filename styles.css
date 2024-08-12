@@ -8,6 +8,12 @@ body {
     padding: 0;
     position: relative;
 }
+h6{
+    font-size: 22px;
+    color: #7e7e7e;
+    margin: 0;
+    padding: 0;
+}
 :root {
     --shadow-color: rgba(0, 0, 0, 0.178);
     --shadow-color2: rgba(0, 0, 0, 0.2);

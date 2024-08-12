@@ -1,4 +1,5 @@
 const addCourseBtn = document.getElementById('add-course-btn');
+const addSiteBtn = document.getElementById('add-site-btn');
 const input_course = document.getElementById('course-name');
 const coursesList = document.getElementById('courses-list');
 const totalTimeSpan = document.getElementById('total-time');
@@ -13,6 +14,10 @@ const custom_button = document.getElementById('popupButton');
 const statistics = document.querySelector('.statistics');
 const close_img = document.querySelector('.close');
 const table_stats = document.querySelector('.table_stats');
+const menu = document.querySelector('.menu');
+const tools = document.getElementById('tools');
+const menuToggle = document.getElementById('menu-toggle');
+const a_link = document.querySelector('.links');
 
 inputE1.checked = JSON.parse(localStorage.getItem("mode")) || false;
 
@@ -25,7 +30,29 @@ let courses = JSON.parse(localStorage.getItem('courses')) || {};
 let chartcolor = "rgb(30, 30, 30)";
 let timeChart = null; // Initialisation de la variable
 let r = document.querySelector(':root');
-
+function openMenu() {
+    if (tools.style.display === "flex") {
+        tools.style.transform = "scale(1, 0)";
+        tools.style.opacity = "0";
+        coursesList.style.transition = "transform 0.5s";
+        coursesList.style.transform = "translate(0, -388px)";
+        setTimeout(() => {
+            coursesList.style.transition = "transform 0s";
+            coursesList.style.transform = "translate(0, 0px)";
+            tools.style.display = "none";
+        }, 500);
+    } else {
+        coursesList.style.transition = "transform 0.5s";
+        coursesList.style.transform = "translate(0, 388px)";
+        tools.style.opacity = "1";
+        setTimeout(() => {
+            tools.style.display = "flex";
+            coursesList.style.transition = "transform 0s";
+            coursesList.style.transform = "translate(0, 0px)";
+            tools.style.transform = "scale(1, 1)";
+        }, 450);
+    }
+}
 document.addEventListener('DOMContentLoaded', () => {
     for (const name in courses) {
         addexistingCourses(name, courses[name].seconds, courses[name].interval, courses[name].notes, courses[name].history);
@@ -35,12 +62,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // displayNotes(courses[name], document.getElementById("course-${name}"));
         
     }
+    totalTimeSpan.addEventListener('click', () => alertetimer());
     addCourseBtn.addEventListener('click', () => {
-        const courseName = document.getElementById('course-name').value;
+        const courseName = document.getElementById('site-name').value;
+        const url = document.getElementById('site-url').value;
         if (courseName && !courses[courseName]) {
-            addCourse(courseName);
-            document.getElementById('course-name').value = '';
+            addsite(courseName);
+            document.getElementById('site-name').value = '';
         }
+    });
+    addSiteBtn.addEventListener('click', () => {
+        const siteName = document.getElementById('site-name').value;
+        addsite(siteName);
+        document.getElementById('site-name').value = '';
+        document.getElementById('site-url').value = '';
     });
     function addexistingCourses(name, les_secondes, intervalle, les_notes, historique) {
         if (historique instanceof Array){
@@ -94,6 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }  
 
         coursesList.appendChild(courseElement);
+    }
+    function addsite(name, url) {
+        const siteElement = document.createElement('div');
+        siteElement.classList.add('sites-ref');
+        siteElement.innerHTML = `
+        <img src="https://cdn2.iconfinder.com/data/icons/university-tuition-and-college-1/122/Icons-07-512.png" alt="Logo" class="logo">
+        <span class="site"><a href="${url}" target="_blank">${name}</a></span>
+        `;
+        tools.appendChild(siteElement);
     }
     function addCourse(name) {
         const course = {
@@ -389,6 +433,7 @@ function updateBody() {
         r.style.setProperty('--tr-color', "rgb(90, 90, 90)");
         r.style.setProperty('--tr-title-color', "rgb(20, 20, 20)");
         r.style.setProperty('--td-color', "rgb(33, 94, 160)");
+        a_link.style.color = "white";
 
     } else {
         bodyE1.style.background = "#efefef";
@@ -415,6 +460,7 @@ function updateBody() {
         r.style.setProperty('--tr-title-color', "rgb(200, 200, 200)");
         r.style.setProperty('--td-color', "rgb(200, 230, 255)");
         r.style.setProperty('--table-color', "black");
+        a_link.style.color = "black";
     }
 }
 

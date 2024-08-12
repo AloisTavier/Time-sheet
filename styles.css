@@ -3,6 +3,8 @@ body {
     background-color: #efefef;
     color: #333;
     margin: 0;
+    height: 100vh;
+    margin: 0;
     padding: 0;
     position: relative;
 }
@@ -35,6 +37,9 @@ body {
     overflow: auto;
     color: var(--course-color);
     background-color: var(--notes-back-color);
+}
+#courses-list{
+    transition: transform 0.6s ease;
 }
 .container {
     max-width: 800px;
@@ -78,6 +83,10 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     font-size: small;
+}
+#add-site-btn{
+    height: 40px;
+    background-color: blueviolet;
 }
 
 .add-course button:hover {
@@ -175,6 +184,7 @@ h1 {
     justify-content:center;
     text-align: center;
     margin-top: 20px;
+    cursor: pointer;
 }
 .add-notes-btn{
     padding: 8px 15px 8px 15px;
@@ -223,7 +233,7 @@ h1 {
 .custom-alert {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1100;
     left: 0;
     top: 0;
     width: 100%;
@@ -405,14 +415,79 @@ table th {
         transform: translate(0);
     }
 }
+#menu-toggle {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    font-size: 22px;
+    border-radius: 5px;
+    background-color: rgb(217, 217, 217);
+    cursor: pointer;
+    border: solid 2.5px rgb(87, 87, 87);
+}
+#menu-toggle:hover {
+    background-color: rgb(230, 228, 228);
+}
+#menu-toggle:active {
+    background-color: rgb(219, 219, 219);
+}
+#tools{
+    gap: 10px;
+    display: none;
+    padding: 20px;
+    flex-direction: column;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transform: scale(1, 0.3);
+    transition: transform 0.6s, opacity 0.6s;
+}
+.logo{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sites-ref{
+    height: 40px;
+    padding: 15px 10px 20px 30px;
+    gap: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 2px rgb(200, 200, 200);
+    transition: transform 0.3s;
+}
+.site a {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, serif;
+    font-size: large;
+    padding: 10px 10px 10px 10px;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    color: var(--course-color);
+    width: fit-content;
+    text-align:center;
+    font-size: 18px;
+}
+.sites-ref:hover {
+    transform: scale(1.02);
+}
+#div-site{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+#div-site input{
+    width: 200px;
+    background-color: var(--BackColor);
+}
 @media (max-width: 890px) {
-    .container {
-        height: 100%;
-    }
+
     .add-course input {
         width: 200px;
     }
-
     .course {
         flex-direction: column;
         align-items: flex-start;
@@ -442,10 +517,16 @@ table th {
         padding: 0;
         translate: -6px -36px; ;
     }
+    #div-site{
+        flex-direction: column;
+    }
+    #div-site input{
+        max-width: 150px;
+    }
 }
+
 @media (max-width: 570px) {
     .container {
-        height: 100%;
         margin: 0;
         padding: 40px 25px 25px 25px;
         border-radius: 0;

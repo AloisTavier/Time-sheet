@@ -16,16 +16,41 @@
             <canvas id="timeChart"></canvas>
         </div>
     </div>
+
     <div class="container">
         <div class="course" style="display: none;"></div>
         <input type="checkbox" class="input" id="dark-mode">
         <label for="dark-mode" class="label" title="Mode sombre">
             <div class="circle"></div>
         </label>
+        <button id="menu-toggle" onclick="openMenu()">☰</button>
         <h1>Suivi du Temps d'Étude</h1>
         <div class="add-course">
             <input type="text" id="course-name" placeholder="Nom du cours">
             <button id="add-course-btn">Ajouter le cours</button>
+        </div>
+        <div id="tools">
+            <h2>Outils</h2>
+            <div class="add-course">
+                <div id="div-site">
+                    <input type="text" class="site-input" id="site-name" placeholder="Nom du site">
+                    <input type="text" id="site-url" placeholder="URL du site">
+                </div>
+                <button id="add-site-btn">Ajouter un site</button>
+               
+            </div>
+            <div class="sites-ref">
+                <img src="https://cdn4.iconfinder.com/data/icons/business-finances/512/business_finances_finances_calculator_calculation_money-512.png" alt="Logo" class="logo">
+                <span class="site"><a class="links" href="https://www.desmos.com/scientific?lang=fr" target="_blank">Calculatrice</a></span>
+            </div>
+            <div class="sites-ref">
+                <img src="https://static.vecteezy.com/system/resources/previews/022/841/114/non_2x/chatgpt-logo-transparent-background-free-png.png" alt="Logo" class="logo">
+                <span class="site"><a class="links" href="https://chatgpt.com" target="_blank">Chat gpt</a></span>
+            </div>
+            <div class="sites-ref">
+                <img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/moodle_original_logo_icon_146420.png" alt="Logo" class="logo">
+                <span class="site"><a class="links"href="https://moodle.uclouvain.be/my/" target="_blank">Moodle</a></span>
+            </div>
         </div>
         <div id="courses-list"></div>
         <div class="total-time">

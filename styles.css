@@ -84,6 +84,29 @@ h1 {
     cursor: pointer;
     font-size: small;
 }
+.add-site {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.add-site input {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #adadad;
+    border-radius: 4px;
+    font-size: small;
+}
+.add-site button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    background-color: #28a745;
+    transition: transform 0.3s, background-color 0.3s ease;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: small;
+}
 #add-site-btn{
     height: 40px;
     background-color: blueviolet;

@@ -59,16 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
         totalSeconds += courses[name].seconds;
         updateTimeDisplay(courses[name].seconds, document.querySelector(`[data-course="${name}"] .time`));
         updateTimeDisplay(totalSeconds, totalTimeSpan);
-        // displayNotes(courses[name], document.getElementById("course-${name}"));
         
     }
     totalTimeSpan.addEventListener('click', () => alertetimer());
     addCourseBtn.addEventListener('click', () => {
-        const courseName = document.getElementById('site-name').value;
-        const url = document.getElementById('site-url').value;
+        const courseName = document.getElementById('course-name').value;
         if (courseName && !courses[courseName]) {
-            addsite(courseName);
-            document.getElementById('site-name').value = '';
+            addCourse(courseName);
+            document.getElementById('course-name').value = '';
         }
     });
     addSiteBtn.addEventListener('click', () => {
